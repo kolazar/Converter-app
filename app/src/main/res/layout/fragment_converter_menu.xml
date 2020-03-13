@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/logo"
+        layout="@layout/part_logo"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        />
+
+
+<TextView
+    android:id="@+id/view"
+    android:layout_width="272dp"
+    android:layout_height="220dp"
+    android:layout_below="@+id/logo"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+
+/>
+
+    <TextView
+        android:id="@+id/resultLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/printValue"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/printValue"
+        android:text="@string/result"
+
+        android:textSize="11pt"
+        android:layout_alignStart="@+id/printValue" />
+
+    <TextView
+        android:id="@+id/yourResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/printValue"
+        android:layout_marginTop="60dp"
+        android:layout_alignRight="@+id/printValue"
+        android:textSize="11pt"
+        tools:text="your result"
+        android:layout_alignEnd="@+id/printValue" />
+
+    <EditText
+        android:id="@+id/printValue"
+        android:layout_width="252dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/view"
+        android:hint="@string/value_hint"
+        android:autofillHints="@string/value_hint"/>
+
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="@style/SecondaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultLabel"
+        android:layout_alignStart="@+id/resultLabel"
+        android:layout_alignLeft="@+id/resultLabel"
+        android:layout_alignEnd="@+id/yourResult"
+        android:layout_alignRight="@+id/yourResult"
+        android:layout_marginTop="50dp"
+        android:text="@string/cancel" />
+</RelativeLayout>

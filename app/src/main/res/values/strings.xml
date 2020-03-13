@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Converter</string>
+    <string name="app_logo">Converter</string>
+    <string name="value_hint">Enter value</string>
+    <string name="result">Result:</string>
+    <string name="choose_unit">Choose unit</string>
+    <string name="menu">Main Menu</string>
+    <string name="convert_length">Length</string>
+    <string name="convert_temp">Temperature</string>
+    <string name="convert_weight">Weight</string>
+    <string-array name="length_types">
+        <item>cm</item>
+        <item>m</item>
+        <item>km</item>
+        <item>in</item>
+        <item>ft</item>
+        <item>yd</item>
+        <item>mi</item>
+        </string-array>
+    <string-array name="temp_types">
+        <item>C</item>
+        <item>F</item>
+        <item>K</item>
+    </string-array>
+    <string-array name="weight_types">
+        <item>g</item>
+        <item>kg</item>
+        <item>t</item>
+        <item>ct</item>
+        <item>funt</item>
+        <item>lb</item>
+    </string-array>
+    <string name="quit">Quit</string>
+    <string name="try_again">Try Again</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="empty_fields_error">Some fields are
+    empty</string>
+    <string name="error">Error! Please check your internet
+connection and try again</string>
+
+</resources>
