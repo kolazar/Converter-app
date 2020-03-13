@@ -26,8 +26,8 @@ public class TemperatureFragment extends BaseFragment {
 
     private EditText printTemp;
     private TextView result;
-    private String item1;
-    private String item2;
+    private String item1 = "";
+    private String item2 = "";
 
     public static TemperatureFragment newInstance() {
         TemperatureFragment fragment = new TemperatureFragment();
@@ -38,7 +38,7 @@ public class TemperatureFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_weight, container, false);
+        return inflater.inflate(R.layout.fragment_temperature, container, false);
     }
 
     @Override
@@ -102,56 +102,56 @@ public class TemperatureFragment extends BaseFragment {
         double computation;
         String abbr = " ";
         String computation_s = " ";
-        switch(item1)
-        {
-            case "C":
-                if(item2.equals("F")){
-                    computation = (Double.parseDouble(printTemp.getText().toString()) * (9/5)) + 32;
-                abbr= " F";
-                computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else if(item2.equals("K")){
-                    computation = Double.parseDouble(printTemp.getText().toString()) +273.15;
-                    abbr= " K";
-                    computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else {
-                abbr= " C";
-                computation_s = "0.00";
+        String enteredVal = printTemp.getText().toString();
+
+        if(!enteredVal.isEmpty()) {
+
+
+            switch (item1) {
+                case "C":
+                    if (item2.equals("F")) {
+                        computation = (Double.parseDouble(enteredVal) * (9.0 / 5.0)) + 32;
+                        abbr = " F";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else if (item2.equals("K")) {
+                        computation = Double.parseDouble(enteredVal) + 273.15;
+                        abbr = " K";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else {
+                        abbr = " C";
+                        computation_s = enteredVal;
+                    }
+                    break;
+                case "F":
+                    if (item2.equals("C")) {
+                        computation = (Double.parseDouble(enteredVal) - 32) * (5.0 / 9.0);
+                        abbr = " C";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else if (item2.equals("K")) {
+                        computation = (Double.parseDouble(enteredVal) - 32) * (5.0 / 9.0) + 273.15;
+                        abbr = " K";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else {
+                        abbr = " F";
+                        computation_s = enteredVal;
+                    }
+                    break;
+                case "K":
+                    if (item2.equals("C")) {
+                        computation = (Double.parseDouble(enteredVal) - 273.15);
+                        abbr = " C";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else if (item2.equals("F")) {
+                        computation = (Double.parseDouble(enteredVal) - 273.15) * (9.0 / 5.0) + 32;
+                        abbr = " F";
+                        computation_s = String.format(Locale.getDefault(), "%.2f", computation);
+                    } else {
+                        abbr = " K";
+                        computation_s = enteredVal;
+                    }
+                    break;
+
             }
-                break;
-            case "F":
-                if(item2.equals("C")){
-                    computation = (Double.parseDouble(printTemp.getText().toString()) - 32) * (5/9);
-                    abbr= " C";
-                    computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else if(item2.equals("K")){
-                    computation = (Double.parseDouble(printTemp.getText().toString()) - 32) * (5/9) + 273.15;
-                    abbr= " K";
-                    computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else {
-                    abbr= " F";
-                    computation_s = "0.00";
-                }
-                break;
-            case "K":
-                if(item2.equals("C")){
-                    computation = (Double.parseDouble(printTemp.getText().toString()) - 273.15);
-                    abbr= " C";
-                    computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else if(item2.equals("F")){
-                    computation = (Double.parseDouble(printTemp.getText().toString()) - 273.15) * (9/5) + 32;
-                    abbr= " F";
-                    computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-                }
-                else {
-                    abbr= " K";
-                    computation_s = "0.00";
-                }
-                break;
         }
 
         result.setText(computation_s.concat(abbr));
