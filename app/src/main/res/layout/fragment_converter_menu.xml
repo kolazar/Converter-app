@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/printValue"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/printValue"
         android:text="@string/result"
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/printValue"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_alignRight="@+id/printValue"
         android:textSize="11pt"
         tools:text="your result"
@@ -71,6 +71,7 @@
         android:layout_alignLeft="@+id/resultLabel"
         android:layout_alignEnd="@+id/yourResult"
         android:layout_alignRight="@+id/yourResult"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+
         android:text="@string/cancel" />
 </RelativeLayout>
