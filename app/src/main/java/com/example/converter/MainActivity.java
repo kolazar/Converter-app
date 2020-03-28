@@ -1,32 +1,55 @@
 package com.example.converter;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 
-import com.example.converter.contract.AppContract;
-
-import com.example.converter.fragments.LengthFragment;
-import com.example.converter.fragments.MenuFragment;
-import com.example.converter.fragments.TemperatureFragment;
-import com.example.converter.fragments.WeightFragment;
+import com.example.converter.activities.LengthActivity;
 
 
-import java.util.UUID;
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity implements AppContract {
+    private SharedPreferences prefs;
+    public static final String APP_PREFERENCES = "com.example.converter.mysettings";
+    private final String[] lengthTypes = {  "cm",  "m", "km", "in", "ft", "yd","mi"};
+    private final double[] lengthConversionFactors = {  0.01, 1.0, 1000.0, 0.0254, 0.3048, 0.9144, 1609.34};
+    private final String[] weightTypes = {  "g",  "kg", "t", "ct", "funt", "lb"};
+    private final double[] weightConversionFactors = {  0.001, 1.0, 1000.0, 0.0002, 0.409517, 16.3807};
+
+
+    public SharedPreferences getPrefs() {
+        return prefs;
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            launchFragment(null, new MenuFragment());
-        }
+        setContentView(R.layout.fragment_menu);
+        setSharedPreferences();
+    }
+
+    public void onToLengthScreen(View view) {
+        Intent intent = new Intent(this, LengthActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToTemperatureScreen(View view) {
+        Intent intent = new Intent(this,LengthActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToWeightScreen(View view) {
+        Intent intent = new Intent(this,LengthActivity.class);
+        startActivity(intent);
+    }
+
+    public void onQuit(View view) {
+       cancel();
     }
 
     @Override
@@ -34,38 +57,6 @@ public class MainActivity extends AppCompatActivity implements AppContract {
         cancel();
     }
 
-    private void launchFragment(@Nullable Fragment target,
-                Fragment fragment) {
-            if (target != null) {
-                fragment.setTargetFragment(target, 0);
-            }
-            String tag = UUID.randomUUID().toString();
-            getSupportFragmentManager().beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragmentContainer, fragment, tag)
-                    .commit();
-    }
-
-    @Override
-    public void toLengthScreen(Fragment target) {
-        launchFragment(target,
-                LengthFragment.newInstance());
-    }
-
-    @Override
-    public void toTemperatureScreen(Fragment target) {
-        launchFragment(target,
-                TemperatureFragment.newInstance());
-    }
-
-    @Override
-    public void toWeightScreen(Fragment target) {
-        launchFragment(target,
-                WeightFragment.newInstance());
-    }
-
-
-        @Override
     public void cancel() {
         int count = getSupportFragmentManager()
                 .getBackStackEntryCount();
@@ -76,4 +67,21 @@ public class MainActivity extends AppCompatActivity implements AppContract {
         }
     }
 
+    public void setSharedPreferences(){
+        prefs = getSharedPreferences(APP_PREFERENCES,MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        for (int i=0;i<lengthTypes.length;i++){
+            editor.putString(lengthTypes[i],String.valueOf(lengthConversionFactors[i]));
+        }
+
+        for (int i=0;i<weightTypes.length;i++){
+            editor.putString(weightTypes[i],String.valueOf(weightConversionFactors[i]));
+        }
+
+        editor.apply();
+
+    }
 }
+
+

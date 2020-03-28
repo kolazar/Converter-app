@@ -20,18 +20,21 @@
         style="@style/MenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onToLengthScreen"
         android:text="@string/convert_length" />
     <Button
         android:id="@+id/convertTempButton"
         style="@style/MenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onToTemperatureScreen"
         android:text="@string/convert_temp" />
     <Button
         android:id="@+id/convertWeightButton"
         style="@style/MenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onToWeightScreen"
         android:text="@string/convert_weight" />
     <Button
         android:id="@+id/quitButton"
@@ -39,6 +42,7 @@
         android:background="@color/error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onQuit"
         android:text="@string/quit" />
     <TextView
         android:id="@+id/versionTextView"
