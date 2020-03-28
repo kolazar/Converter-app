@@ -72,8 +72,8 @@ public class LengthActivity extends MainActivity {
                 if (printLength.getText() != null){
                     if (getService() == null) return;
                     String printedLength = printLength.getText().toString();
-                    String resultValue = getService().conversionCalculation(printedLength,
-                            false,conversionRate1,conversionRate2,item2);
+                    String resultValue = getService().weightLengthCalculation(printedLength,
+                            conversionRate1,conversionRate2,item2);
                     result.setText(resultValue);
                 }
             }
@@ -91,8 +91,8 @@ public class LengthActivity extends MainActivity {
                 if (printLength.getText() != null){
                     if (getService() == null) return;
                     String printedLength = printLength.getText().toString();
-                    String resultValue = getService().conversionCalculation(printedLength,
-                            false,conversionRate1,conversionRate2,item2);
+                    String resultValue = getService().weightLengthCalculation(printedLength,
+                            conversionRate1,conversionRate2,item2);
                     result.setText(resultValue);
 
                 }
@@ -106,8 +106,8 @@ public class LengthActivity extends MainActivity {
             public void afterTextChanged(Editable s) {
 
                 String printedLength = printLength.getText().toString();
-                String resultValue = getService().conversionCalculation(printedLength,
-                        false,conversionRate1,conversionRate2,item2);
+                String resultValue = getService().weightLengthCalculation(printedLength,
+                        conversionRate1,conversionRate2,item2);
                 result.setText(resultValue);
             }
 

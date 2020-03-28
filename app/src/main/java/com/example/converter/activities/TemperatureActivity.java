@@ -23,11 +23,11 @@ import com.example.converter.sync.ConverterService;
 public class TemperatureActivity extends MainActivity {
 
     private TextView result;
-    private String item1;
-    private String conversionRate1;
-    private String item2;
-    private String conversionRate2;
+    private String item1 ="";
+    private String item2 = "";
     private EditText printTemp;
+    private String tempConversionType;
+    private String formula;
 
 
     private SharedPreferences prefs;
@@ -53,8 +53,8 @@ public class TemperatureActivity extends MainActivity {
 
         printTemp = findViewById(R.id.printValue);
 
-        Spinner firstUnitSpinner = findViewById(R.id.weight_spinner1);
-        Spinner secondUnitSpinner = findViewById(R.id.weight_spinner2);
+        Spinner firstUnitSpinner = findViewById(R.id.temp_spinner1);
+        Spinner secondUnitSpinner = findViewById(R.id.temp_spinner2);
 
         result = findViewById(R.id.yourResult);
         prefs = getSharedPreferences(APP_PREFERENCES,MODE_PRIVATE);
@@ -65,13 +65,15 @@ public class TemperatureActivity extends MainActivity {
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
                 item1 = firstUnitSpinner.getSelectedItem().toString();
-                conversionRate1 = prefs.getString(item1,"0.0");
+                tempConversionType = item1.concat(item2);
+                formula = prefs.getString(tempConversionType,"0.0");
+
 
                 if (printTemp.getText() != null){
                     if (getService() == null) return;
-                    String printedLength = printTemp.getText().toString();
-                    String resultValue = getService().conversionCalculation(printedLength,
-                            false,conversionRate1,conversionRate2,item2);
+                    String printedTemp = printTemp.getText().toString();
+                    String resultValue = getService().tempCalculation(printedTemp,
+                            formula,tempConversionType);
                     result.setText(resultValue);
                 }
             }
@@ -85,12 +87,14 @@ public class TemperatureActivity extends MainActivity {
 
 
                 item2 = secondUnitSpinner.getSelectedItem().toString();
-                conversionRate2 = prefs.getString(item2,"0.0");
+                tempConversionType = item1.concat(item2);
+                formula = prefs.getString(tempConversionType,"0.0");
+
                 if (printTemp.getText() != null){
                     if (getService() == null) return;
                     String printedLength = printTemp.getText().toString();
-                    String resultValue = getService().conversionCalculation(printedLength,
-                            false,conversionRate1,conversionRate2,item2);
+                    String resultValue = getService().tempCalculation(printedLength,
+                            formula,tempConversionType);
                     result.setText(resultValue);
 
                 }
@@ -104,8 +108,8 @@ public class TemperatureActivity extends MainActivity {
             public void afterTextChanged(Editable s) {
 
                 String printedLength = printTemp.getText().toString();
-                String resultValue = getService().conversionCalculation(printedLength,
-                        false,conversionRate1,conversionRate2,item2);
+                String resultValue = getService().tempCalculation(printedLength,
+                        formula,tempConversionType);
                 result.setText(resultValue);
             }
 

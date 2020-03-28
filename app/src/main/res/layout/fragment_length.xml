@@ -24,8 +24,8 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/logo"
     android:layout_marginTop="60dp"
-    android:layout_alignLeft="@id/weight_spinner1"
-    android:layout_alignStart="@id/weight_spinner1"
+    android:layout_alignLeft="@id/length_spinner1"
+    android:layout_alignStart="@id/length_spinner1"
     android:text="@string/choose_unit"
     />
     <Spinner
@@ -43,10 +43,10 @@
         android:id="@+id/choose_unit_label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/weight_spinner1"
+        android:layout_below="@id/length_spinner1"
         android:layout_marginTop="40dp"
-        android:layout_alignLeft="@id/weight_spinner2"
-        android:layout_alignStart="@id/weight_spinner2"
+        android:layout_alignLeft="@id/length_spinner2"
+        android:layout_alignStart="@id/length_spinner2"
         android:text="@string/choose_unit"
         />
 

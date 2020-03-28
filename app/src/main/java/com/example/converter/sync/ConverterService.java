@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.EditText;
+import org.mariuszgromada.math.mxparser.*;
+
 
 
 import androidx.annotation.Nullable;
@@ -22,14 +23,6 @@ public class ConverterService extends Service {
     private CustomBinder binder =
             new CustomBinder();
 
-
-    public EditText printWeight;
-
-    private final String[] weightTypes = {  "g",  "kg", "t", "ct", "funt", "lb"};
-    private final double[] weightConversionFactors = {  0.001, 1.0, 1000.0, 0.0002, 0.409517, 16.3807};
-
-
-    public static final String EXTRA_VALUE = "VALUE";
 
     @Override
     public void onCreate() {
@@ -70,28 +63,85 @@ public class ConverterService extends Service {
         }
     }
 
-    public String conversionCalculation(String printedValue, boolean isTemperature,
+    public String weightLengthCalculation(String printedValue,
                                         String conversionFactor1, String conversionFactor2, String unit){
 
-        double conversionRate = 0.0;
+        double conversionRate;
+        String computation_s;
+        String abbr;
+        double computation;
 
-        if(isTemperature){
 
-        }
-        else {
             conversionRate =  Double.parseDouble(conversionFactor1) /  Double.parseDouble(conversionFactor2);
-        }
+                double value = 0;
+                if (!"".equals(printedValue)) {
+                    value = Double.parseDouble(printedValue);
+                }
 
-        double value = 0;
-        if (!"".equals(printedValue)) {
-            value = Double.parseDouble(printedValue);
-        }
+                 computation = value * conversionRate;
+                 computation_s = String.format(Locale.getDefault(),"%.2f",computation);
+                 abbr = " " + unit;
 
-        double computation = value * conversionRate;
-        String computation_s = String.format(Locale.getDefault(),"%.2f",computation);
-        String abbr = " " + unit;
+
 
         return computation_s.concat(abbr);
+
+    }
+
+    public String tempCalculation(String printedValue,
+                                  String formula, String unit){
+
+        String computation_s = "";
+        String abbr = "";
+        String replaceString;
+        Expression expression = new Expression();
+
+        switch (unit) {
+                case "CF":
+                    abbr = " F";
+                    replaceString = formula.replace("C",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+                case "CK":
+                    abbr = " K";
+                    replaceString = formula.replace("C",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+                case "FC":
+                    abbr = " C";
+                    replaceString = formula.replace("F",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+                case "FK":
+                    abbr = " K";
+                    replaceString = formula.replace("F",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+                case "KC":
+                    abbr = " C";
+                    replaceString = formula.replace("C",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+                case "KF":
+                    abbr = " F";
+                    replaceString = formula.replace("K",printedValue);
+                    expression.setExpressionString(replaceString);
+                    computation_s = Double.toString(expression.calculate());
+                    break;
+
+            case "CC":
+                    abbr = " C";
+                    computation_s = printedValue;
+                    break;
+            default:
+                abbr ="";
+            }
+            return computation_s.concat(abbr);
 
     }
 

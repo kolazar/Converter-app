@@ -12,6 +12,7 @@ import android.view.View;
 
 
 import com.example.converter.activities.LengthActivity;
+import com.example.converter.activities.TemperatureActivity;
 import com.example.converter.activities.WeightActivity;
 import com.example.converter.sync.ConverterService;
 import com.example.converter.sync.ConverterService.CustomBinder;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final String[] weightTypes = {  "g",  "kg", "t", "ct", "funt", "lb"};
     private final double[] weightConversionFactors = {  0.001, 1.0, 1000.0, 0.0002, 0.409517, 16.3807};
+
+    private final String[] tempTypes = {  "CF", "CK", "KF", "KC", "FC", "FK" };
+    private final String[] tempFormulas = {  "9.0/5*C+32", "C+273", "(K-273)*9.0/5+32","K-273.15","(F-32)*5.0/9","(F-32)*5.0/9+273.15"};
+
 
     private ConverterService service;
 
@@ -46,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //TODO
-//    public void onToTemperatureScreen(View view) {
-////        Intent intent = new Intent(this,LengthActivity.class);
-////        startActivity(intent);
-////    }
+
+    public void onToTemperatureScreen(View view) {
+        Intent intent = new Intent(this, TemperatureActivity.class);
+        startActivity(intent);
+    }
 
     public void onToWeightScreen(View view) {
         Intent intent = new Intent(this, WeightActivity.class);
@@ -86,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i=0;i<weightTypes.length;i++){
             editor.putString(weightTypes[i],String.valueOf(weightConversionFactors[i]));
+        }
+
+        for (int i=0;i<tempTypes.length;i++){
+            editor.putString(tempTypes[i],String.valueOf(tempFormulas[i]));
         }
 
         editor.apply();
