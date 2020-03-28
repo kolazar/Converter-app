@@ -70,16 +70,16 @@ public class ConverterService extends Service {
         }
     }
 
-    public String calculateLengthWeight(String printedValue,boolean length,
+    public String conversionCalculation(String printedValue, boolean isTemperature,
                                         String conversionFactor1, String conversionFactor2, String unit){
 
         double conversionRate = 0.0;
 
-        if (length){
-             conversionRate =  Double.parseDouble(conversionFactor1) /  Double.parseDouble(conversionFactor2);
+        if(isTemperature){
+
         }
         else {
-            //conversionRate = weightConversionFactors[conversionItem1] / weightConversionFactors[conversionItem2];
+            conversionRate =  Double.parseDouble(conversionFactor1) /  Double.parseDouble(conversionFactor2);
         }
 
         double value = 0;

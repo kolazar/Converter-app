@@ -1,13 +1,10 @@
 package com.example.converter.activities;
 
 
-
 import android.content.Context;
 import android.content.Intent;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -23,14 +20,15 @@ import com.example.converter.R;
 import com.example.converter.sync.ConverterService;
 
 
-public class LengthActivity extends MainActivity {
+public class WeightActivity extends MainActivity {
 
     private TextView result;
     private String item1;
     private String conversionRate1;
     private String item2;
     private String conversionRate2;
-    private EditText printLength;
+    private EditText printWeight;
+
 
     private SharedPreferences prefs;
 
@@ -51,12 +49,12 @@ public class LengthActivity extends MainActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_length);
+        setContentView(R.layout.fragment_weight);
 
-        printLength = findViewById(R.id.printValue);
+        printWeight = findViewById(R.id.printValue);
 
-        Spinner firstUnitSpinner = findViewById(R.id.length_spinner1);
-        Spinner secondUnitSpinner = findViewById(R.id.length_spinner2);
+        Spinner firstUnitSpinner = findViewById(R.id.weight_spinner1);
+        Spinner secondUnitSpinner = findViewById(R.id.weight_spinner2);
 
         result = findViewById(R.id.yourResult);
         prefs = getSharedPreferences(APP_PREFERENCES,MODE_PRIVATE);
@@ -69,9 +67,9 @@ public class LengthActivity extends MainActivity {
                 item1 = firstUnitSpinner.getSelectedItem().toString();
                 conversionRate1 = prefs.getString(item1,"0.0");
 
-                if (printLength.getText() != null){
+                if (printWeight.getText() != null){
                     if (getService() == null) return;
-                    String printedLength = printLength.getText().toString();
+                    String printedLength = printWeight.getText().toString();
                     String resultValue = getService().conversionCalculation(printedLength,
                             false,conversionRate1,conversionRate2,item2);
                     result.setText(resultValue);
@@ -88,9 +86,9 @@ public class LengthActivity extends MainActivity {
 
                 item2 = secondUnitSpinner.getSelectedItem().toString();
                 conversionRate2 = prefs.getString(item2,"0.0");
-                if (printLength.getText() != null){
+                if (printWeight.getText() != null){
                     if (getService() == null) return;
-                    String printedLength = printLength.getText().toString();
+                    String printedLength = printWeight.getText().toString();
                     String resultValue = getService().conversionCalculation(printedLength,
                             false,conversionRate1,conversionRate2,item2);
                     result.setText(resultValue);
@@ -101,11 +99,11 @@ public class LengthActivity extends MainActivity {
             }
         });
 
-        printLength.addTextChangedListener(new TextWatcher() {
+        printWeight.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
 
-                String printedLength = printLength.getText().toString();
+                String printedLength = printWeight.getText().toString();
                 String resultValue = getService().conversionCalculation(printedLength,
                         false,conversionRate1,conversionRate2,item2);
                 result.setText(resultValue);
@@ -121,6 +119,7 @@ public class LengthActivity extends MainActivity {
         });
 
     }
+
 
 
 }

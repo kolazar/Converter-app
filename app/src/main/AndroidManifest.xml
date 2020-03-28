@@ -16,8 +16,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.LengthActivity">
-        </activity>
+        <activity android:name=".activities.LengthActivity" />
+        <activity android:name=".activities.WeightActivity" />
+        <activity android:name=".activities.TemperatureActivity" />
 
         <service
             android:name=".sync.ConverterService"
