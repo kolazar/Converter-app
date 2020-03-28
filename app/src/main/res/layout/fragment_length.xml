@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include
         android:id="@+id/logo"
         layout="@layout/part_logo"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-
         />
+
     <include
-    android:id="@+id/conv_menu"
-    layout="@layout/fragment_converter_menu"
-    android:layout_width="500dp"
-    android:layout_height="wrap_content"
-    />
-<TextView
-    android:id="@+id/choose_unit_label"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/logo"
-    android:layout_marginTop="60dp"
-    android:layout_alignLeft="@id/length_spinner1"
-    android:layout_alignStart="@id/length_spinner1"
-    android:text="@string/choose_unit"
-    />
+        android:id="@+id/conv_menu"
+        layout="@layout/fragment_converter_menu"
+               />
+
+    <TextView
+        android:id="@+id/choose_unit_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/choose_unit"
+         />
     <Spinner
         android:id="@+id/length_spinner1"
         android:layout_width="252dp"
         android:layout_height="48dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/choose_unit_label"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginBottom="60dp"
         android:entries="@array/length_types"
         />
 
@@ -43,10 +37,9 @@
         android:id="@+id/choose_unit_label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/length_spinner1"
-        android:layout_marginTop="40dp"
-        android:layout_alignLeft="@id/length_spinner2"
-        android:layout_alignStart="@id/length_spinner2"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:text="@string/choose_unit"
         />
 
@@ -54,14 +47,13 @@
         android:id="@+id/length_spinner2"
         android:layout_width="252dp"
         android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/choose_unit_label2"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_vertical|center"
+
         android:entries="@array/length_types"
         />
 
 
 
 
-</RelativeLayout>
+</FrameLayout>
