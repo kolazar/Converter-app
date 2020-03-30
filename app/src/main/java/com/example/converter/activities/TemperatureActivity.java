@@ -108,9 +108,12 @@ public class TemperatureActivity extends MainActivity {
             public void afterTextChanged(Editable s) {
 
                 String printedLength = printTemp.getText().toString();
-                String resultValue = getService().tempCalculation(printedLength,
-                        formula,tempConversionType);
-                result.setText(resultValue);
+                if (printTemp.getText() != null) {
+                    if (getService() == null) return;
+                    String resultValue = getService().tempCalculation(printedLength,
+                            formula, tempConversionType);
+                    result.setText(resultValue);
+                }
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

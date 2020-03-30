@@ -106,9 +106,12 @@ public class LengthActivity extends MainActivity {
             public void afterTextChanged(Editable s) {
 
                 String printedLength = printLength.getText().toString();
-                String resultValue = getService().weightLengthCalculation(printedLength,
-                        conversionRate1,conversionRate2,item2);
-                result.setText(resultValue);
+                if (printLength.getText() != null) {
+                    if (getService() == null) return;
+                    String resultValue = getService().weightLengthCalculation(printedLength,
+                            conversionRate1, conversionRate2, item2);
+                    result.setText(resultValue);
+                }
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

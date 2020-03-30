@@ -104,11 +104,14 @@ public class WeightActivity extends MainActivity {
             public void afterTextChanged(Editable s) {
 
                 String printedLength = printWeight.getText().toString();
-                String resultValue = getService().weightLengthCalculation(printedLength,
-                        conversionRate1,conversionRate2,item2);
-                result.setText(resultValue);
-            }
 
+                if (printWeight.getText() != null) {
+                    if (getService() == null) return;
+                    String resultValue = getService().weightLengthCalculation(printedLength,
+                            conversionRate1, conversionRate2, item2);
+                    result.setText(resultValue);
+                }
+            }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
