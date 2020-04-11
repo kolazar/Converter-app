@@ -32,19 +32,7 @@ public class TemperatureActivity extends MainActivity {
 
     private SharedPreferences prefs;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Intent intent = new Intent(this,ConverterService.class);
-        bindService(intent,getServiceConnection(), Context.BIND_AUTO_CREATE);
 
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        unbindService(getServiceConnection());
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,13 +57,13 @@ public class TemperatureActivity extends MainActivity {
                 formula = prefs.getString(tempConversionType,"0.0");
 
 
-                if (printTemp.getText() != null){
-                    if (getService() == null) return;
-                    String printedTemp = printTemp.getText().toString();
-                    String resultValue = getService().tempCalculation(printedTemp,
-                            formula,tempConversionType);
-                    result.setText(resultValue);
-                }
+//                if (printTemp.getText() != null){
+//                    if (getService() == null) return;
+//                    String printedTemp = printTemp.getText().toString();
+//                    String resultValue = getService().tempCalculation(printedTemp,
+//                            formula,tempConversionType);
+//                    result.setText(resultValue);
+//                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -90,14 +78,14 @@ public class TemperatureActivity extends MainActivity {
                 tempConversionType = item1.concat(item2);
                 formula = prefs.getString(tempConversionType,"0.0");
 
-                if (printTemp.getText() != null){
-                    if (getService() == null) return;
-                    String printedLength = printTemp.getText().toString();
-                    String resultValue = getService().tempCalculation(printedLength,
-                            formula,tempConversionType);
-                    result.setText(resultValue);
-
-                }
+//                if (printTemp.getText() != null){
+//                    if (getService() == null) return;
+//                    String printedLength = printTemp.getText().toString();
+//                    String resultValue = getService().tempCalculation(printedLength,
+//                            formula,tempConversionType);
+//                    result.setText(resultValue);
+//
+//                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -107,13 +95,13 @@ public class TemperatureActivity extends MainActivity {
 
             public void afterTextChanged(Editable s) {
 
-                String printedLength = printTemp.getText().toString();
-                if (printTemp.getText() != null) {
-                    if (getService() == null) return;
-                    String resultValue = getService().tempCalculation(printedLength,
-                            formula, tempConversionType);
-                    result.setText(resultValue);
-                }
+//                String printedLength = printTemp.getText().toString();
+//                if (printTemp.getText() != null) {
+//                    if (getService() == null) return;
+//                    String resultValue = getService().tempCalculation(printedLength,
+//                            formula, tempConversionType);
+//                    result.setText(resultValue);
+//                }
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

@@ -32,19 +32,7 @@ public class WeightActivity extends MainActivity {
 
     private SharedPreferences prefs;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Intent intent = new Intent(this,ConverterService.class);
-        bindService(intent,getServiceConnection(), Context.BIND_AUTO_CREATE);
 
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        unbindService(getServiceConnection());
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,13 +55,13 @@ public class WeightActivity extends MainActivity {
                 item1 = firstUnitSpinner.getSelectedItem().toString();
                 conversionRate1 = prefs.getString(item1,"0.0");
 
-                if (printWeight.getText() != null){
-                    if (getService() == null) return;
-                    String printedWeight = printWeight.getText().toString();
-                    String resultValue = getService().weightLengthCalculation(printedWeight,
-                            conversionRate1,conversionRate2,item2);
-                    result.setText(resultValue);
-                }
+//                if (printWeight.getText() != null){
+//                    if (getService() == null) return;
+//                    String printedWeight = printWeight.getText().toString();
+//                    String resultValue = getService().weightLengthCalculation(printedWeight,
+//                            conversionRate1,conversionRate2,item2);
+//                    result.setText(resultValue);
+//                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -86,14 +74,14 @@ public class WeightActivity extends MainActivity {
 
                 item2 = secondUnitSpinner.getSelectedItem().toString();
                 conversionRate2 = prefs.getString(item2,"0.0");
-                if (printWeight.getText() != null){
-                    if (getService() == null) return;
-                    String printedLength = printWeight.getText().toString();
-                    String resultValue = getService().weightLengthCalculation(printedLength,
-                            conversionRate1,conversionRate2,item2);
-                    result.setText(resultValue);
-
-                }
+//                if (printWeight.getText() != null){
+//                    if (getService() == null) return;
+//                    String printedLength = printWeight.getText().toString();
+//                    String resultValue = getService().weightLengthCalculation(printedLength,
+//                            conversionRate1,conversionRate2,item2);
+//                    result.setText(resultValue);
+//
+//                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -105,12 +93,12 @@ public class WeightActivity extends MainActivity {
 
                 String printedLength = printWeight.getText().toString();
 
-                if (printWeight.getText() != null) {
-                    if (getService() == null) return;
-                    String resultValue = getService().weightLengthCalculation(printedLength,
-                            conversionRate1, conversionRate2, item2);
-                    result.setText(resultValue);
-                }
+//                if (printWeight.getText() != null) {
+//                    if (getService() == null) return;
+//                    String resultValue = getService().weightLengthCalculation(printedLength,
+//                            conversionRate1, conversionRate2, item2);
+//                    result.setText(resultValue);
+//                }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 

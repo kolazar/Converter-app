@@ -2,20 +2,18 @@ package com.example.converter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
+
 import android.view.View;
 
 
 import com.example.converter.activities.LengthActivity;
 import com.example.converter.activities.TemperatureActivity;
 import com.example.converter.activities.WeightActivity;
-import com.example.converter.sync.ConverterService;
-import com.example.converter.sync.ConverterService.CustomBinder;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,11 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private final String[] tempFormulas = {  "9.0/5*C+32", "C+273", "(K-273)*9.0/5+32","K-273.15","(F-32)*5.0/9","(F-32)*5.0/9+273.15"};
 
 
-    private ConverterService service;
-
-    public ConverterService getService() {
-        return service;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,23 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ServiceConnection serviceConnection =
-            new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name,
-                                               IBinder binder) {
-                    service = ((CustomBinder) binder)
-                            .getService();
-                }
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-                    service = null;
-                }
-            };
-
-    public ServiceConnection getServiceConnection() {
-        return serviceConnection;
-    }
 }
 
 

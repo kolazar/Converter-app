@@ -73,4 +73,13 @@
         android:layout_alignRight="@+id/yourResult"
         android:layout_marginTop="30dp"
         android:text="@string/cancel" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
 </RelativeLayout>
