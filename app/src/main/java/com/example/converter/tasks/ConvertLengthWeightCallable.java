@@ -4,11 +4,11 @@ package com.example.converter.tasks;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-public class ConvertLengthCallable implements Callable<String> {
+public class ConvertLengthWeightCallable implements Callable<String> {
 
     private String printedValue, conversionFactor1,conversionFactor2,unit;
 
-    public ConvertLengthCallable(String printedValue, String conversionFactor1, String conversionFactor2, String unit) {
+    public ConvertLengthWeightCallable(String printedValue, String conversionFactor1, String conversionFactor2, String unit) {
         this.printedValue = printedValue;
         this.conversionFactor1 = conversionFactor1;
         this.conversionFactor2 = conversionFactor2;

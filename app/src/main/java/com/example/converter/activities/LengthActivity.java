@@ -21,7 +21,8 @@ import com.example.converter.MainStateListener;
 import com.example.converter.MainViewState;
 import com.example.converter.R;
 
-import com.example.converter.tasks.ConvertLengthCallable;
+
+import com.example.converter.tasks.ConvertLengthWeightCallable;
 import com.example.converter.tasks.LooperThreadTask;
 import com.example.converter.tasks.Task;
 import com.example.converter.tasks.TaskListener;
@@ -37,6 +38,7 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
     private String item1, item2;
     private String conversionRate1, conversionRate2;
+    private boolean onInput = true;
 
     private SharedPreferences prefs;
 
@@ -59,10 +61,7 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
         setListener(this);
 
-
-
         prefs = getSharedPreferences(APP_PREFERENCES,MODE_PRIVATE);
-
 
         firstUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
@@ -70,11 +69,11 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
                 item1 = firstUnitSpinner.getSelectedItem().toString();
                 conversionRate1 = prefs.getString(item1,"0.0");
+                onInput = false;
 
                 if (input.getText() != null){
                     String printedLength = input.getText().toString();
-                    convertLength(printedLength,conversionRate1,conversionRate2,item2);
-
+                    convertLength(printedLength,conversionRate1,conversionRate2,item2,onInput);
                 }
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -88,10 +87,11 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
                 item2 = secondUnitSpinner.getSelectedItem().toString();
                 conversionRate2 = prefs.getString(item2,"0.0");
+                onInput = false;
+
                 if (input.getText() != null){
                     String printedLength = input.getText().toString();
-                    convertLength(printedLength,conversionRate1,conversionRate2,item2);
-
+                    convertLength(printedLength,conversionRate1,conversionRate2,item2,onInput);
                 }
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -104,7 +104,7 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
                 String printedLength = input.getText().toString();
                 if (input.getText() != null) {
-                    convertLength(printedLength,conversionRate1,conversionRate2,item2);
+                    convertLength(printedLength,conversionRate1,conversionRate2,item2,onInput);
                 }
             }
 
@@ -148,16 +148,18 @@ public class LengthActivity extends MainActivity implements MainStateListener{
 
 
     public void convertLength(String printedLength,
-                              String conversionRate1, String conversionRate2, String item2){
+                              String conversionRate1, String conversionRate2, String item2,boolean onInput){
         currentTask = convertLengthTask(printedLength,conversionRate1,conversionRate2,item2);
 
-        mainViewState.showProgress = true;
-        mainViewState.isSpinner1Enabled = false;
-        mainViewState.isSpinner2Enabled = false;
-        mainViewState.showResultText = false;
-        mainViewState.isInputEnabled = false;
-        mainViewState.result = "";
-        updateState();
+        if(!onInput) {
+            mainViewState.showProgress = true;
+            mainViewState.isSpinner1Enabled = false;
+            mainViewState.isSpinner2Enabled = false;
+            mainViewState.showResultText = false;
+            mainViewState.isInputEnabled = false;
+            mainViewState.result = "";
+            updateState();
+        }
 
         currentTask.execute(new TaskListener<String>() {
             @Override
@@ -196,7 +198,7 @@ public class LengthActivity extends MainActivity implements MainStateListener{
     private Task<String> convertLengthTask(String printedLength,
                                                String conversionRate1, String conversionRate2, String item2){
 
-        return new LooperThreadTask<>(new ConvertLengthCallable(printedLength,
+        return new LooperThreadTask<>(new ConvertLengthWeightCallable(printedLength,
                  conversionRate1, conversionRate2, item2));
     }
 
