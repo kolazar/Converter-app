@@ -16,7 +16,7 @@ public class ConvertTemperatureCallable implements Callable<String> {
     }
 
     @Override
-    public String call() {
+    public String call() throws InterruptedException {
 
         String computation_s = "";
         String abbr = "";
